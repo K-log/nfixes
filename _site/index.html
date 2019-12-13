@@ -1,0 +1,45 @@
+<h1 id="fixes">FIXES</h1>
+<p>All the fixes for all the things.
+Entries are sorted by Machine -&gt; OS -&gt; Fix</p>
+
+<h2 id="early-2011-macbook-pro">Early 2011 MacBook Pro</h2>
+
+<h3 id="ubuntudebian">Ubuntu/Debian</h3>
+
+<h4 id="missing-wifi-drivers">Missing Wifi Drivers</h4>
+<p>source: https://wiki.debian.org/bcm43xx</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Debian 9 "stretch"</span>
+deb http://deb.debian.org/debian/ stretch main contrib non-free
+
+<span class="nb">sudo </span>apt-get update
+
+apt-get <span class="nb">install </span>firmware-b43-installer
+</code></pre></div></div>
+
+<h4 id="neovim-missing-python-support-via-python">NeoVim Missing Python Support via Python</h4>
+<p>source: https://github.com/neovim/neovim/wiki/Installing-Neovim</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>python-neovim
+<span class="nb">sudo </span>apt <span class="nb">install </span>python3-neovim
+</code></pre></div></div>
+
+<p><strong>Alternatively</strong></p>
+
+<p>source: https://neovim.io/doc/user/provider.html</p>
+
+<p>Prerequisits – Python 3</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>python3-pip python3-setuptools python3-wheel
+</code></pre></div></div>
+
+<p>Prerequisits – Python 2</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>python-pip
+<span class="nb">sudo </span>python2 <span class="nt">-m</span> <span class="nb">install</span> <span class="nt">--upgrade</span> setuptools
+</code></pre></div></div>
+
+<p>Install the modules</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> pip <span class="nb">install</span> <span class="nt">--user</span> <span class="nt">--upgrade</span> pynvim
+python2 <span class="nt">-m</span> pip <span class="nb">install</span> <span class="nt">--user</span> <span class="nt">--upgrade</span> pynvim
+</code></pre></div></div>
