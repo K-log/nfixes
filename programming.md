@@ -30,7 +30,9 @@ axios.all(promisesArr)
 ```
 
 
-In this example resp will be an array of responses from each request. This is possible using simply using Promise and any other data fetching method.
+In this example resp will be an array of responses from each request. 
+
+This is possible using simply using Promise and any other data fetching method.
 
 
 
