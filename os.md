@@ -1,11 +1,7 @@
 # Operating System 
 Fixes and notes relating to a specific OS/Environment
 
-
-## Early 2011 MacBook Pro
-
-
-### Manjaro/ArchLinux
+## Manjaro/ArchLinux
 
 **Setup NeoVim IDE**
 
@@ -53,7 +49,7 @@ Once all the plugins are installed it's time to setup syntax checking with [YouC
 
 
 
-### Ubuntu/Debian
+## Ubuntu/Debian
 
 
 **Missing Wifi Drivers**
@@ -67,6 +63,53 @@ deb http://deb.debian.org/debian/ stretch main contrib non-free
 sudo apt-get update
 
 apt-get install firmware-b43-installer
+```
+
+**Wifi disabled after sleep/lock**
+
+source: [wifi-available-networks-not-showing-up-suddenly](https://askubuntu.com/questions/951261/wifi-available-networks-not-showing-up-suddenly/)
+
+Essentially, this systemd script reloads the WiFi kernel module when resuming from suspend.
+
+This script is written for iwlwifi` which is the common Intel driver name. If your's is different change that name below:
+
+```bash
+#!/bin/sh
+
+# NAME: /lib/systemd/system-sleep/iwlwifi-reset
+# DESC: Resets Intel WiFi which can be flakey after a long suspend.
+# DATE: Apr 1, 2017. Modified August 30, 2017.
+
+MYNAME=$0
+
+exit
+
+restart_wifi() {
+    /usr/bin/logger $MYNAME 'restart_wifi BEGIN'
+    /sbin/modprobe -v -r iwldvm # This removes iwlwifi too
+    /sbin/modprobe -v iwlwifi   # This starts iwldvm too
+#    systemctl restart NetworkManager.service
+    /usr/bin/logger 'systemctl restart NetworkManager.service (SUPPRESSED)'
+    /usr/bin/logger $MYNAME 'restart_wifi END'
+}
+
+/usr/bin/logger $MYNAME 'case=[' ${1}' ]'
+case "${1}/${2}" in
+    hibernate|suspend|pre*)
+      ;;
+    resume|thaw|post*)
+      restart_wifi;;
+esac
+```
+NOTE: 
+
+Sometimes simply resetting network manager is all that is needed. In that case un-comment the lines above by removing `#` within the `restart_wifi()` block. 
+Then comment out the two lines directly above it by putting `#` at the beginning of those two lines.
+
+You'll need to create this script, called `iwlwifi-reset`, with sudo powers and save it into the directory `/lib/systemd/system-sleep`. Then mark it executable using:
+
+```bash
+chmod a+x /lib/systemd/system-sleep/iwlwifi-reset
 ```
 
 
