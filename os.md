@@ -52,7 +52,9 @@ Once all the plugins are installed it's time to setup syntax checking with [YouC
 ## Ubuntu/Debian
 
 
-**Missing Wifi Drivers**
+### Missing Wifi Drivers
+
+**Note: ** Only tested on a 2012 macbook pro running Ubuntu 18.4
 
 source: [https://wiki.debian.org/bcm43xx](https://wiki.debian.org/bcm43xx)
 
@@ -65,7 +67,9 @@ sudo apt-get update
 apt-get install firmware-b43-installer
 ```
 
-**Wifi disabled after sleep/lock**
+### Wifi disabled after sleep/lock
+
+**Note: ** Only tested on a 2012 macbook pro running Ubuntu 18.4
 
 source: [wifi-available-networks-not-showing-up-suddenly](https://askubuntu.com/questions/951261/wifi-available-networks-not-showing-up-suddenly/)
 
@@ -112,8 +116,18 @@ You'll need to create this script, called `iwlwifi-reset`, with sudo powers and 
 chmod a+x /lib/systemd/system-sleep/iwlwifi-reset
 ```
 
+### Unable to screenshare in Wayland on Ubuntu 22.x running gnome 3.x
 
-**NeoVim Missing Python Support via Python**
+source: [https://askubuntu.com/questions/1313369/screen-sharing-with-wayland#comment2445442_1398720](https://askubuntu.com/questions/1313369/screen-sharing-with-wayland#comment2445442_1398720)
+
+Simplying install this package fixed the issue.
+
+```bash
+sudo apt install xdg-desktop-portal-gnome
+```
+
+
+### NeoVim Missing Python Support via Python
 
 source: [https://github.com/neovim/neovim/wiki/Installing-Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 
